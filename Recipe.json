@@ -1,0 +1,195 @@
+[
+    {
+        "input": [
+            {
+                "itemID": "DIAMOND",
+                "amount": 160
+            }
+        ],
+        "output": {
+            "itemID": "ENCHANTED_DIAMOND",
+            "amount": 1
+        }
+    },
+    {
+        "input": [
+            {
+                "itemID": "ENCHANTED_DIAMOND",
+                "amount": 160
+            }
+        ],
+        "output": {
+            "itemID": "ENCHANTED_DIAMOND_BLOCK",
+            "amount": 1
+        }
+    },
+    {
+        "input": [
+            {
+                "itemID": "SLIME_BALL",
+                "amount": 160
+            }
+        ],
+        "output": {
+            "itemID": "ENCHANTED_SLIME_BALL",
+            "amount": 1
+        }
+    },
+    {
+        "input": [
+            {
+                "itemID": "ENCHANTED_SLIME_BALL",
+                "amount": 160
+            }
+        ],
+        "output": {
+            "itemID": "ENCHANTED_SLIME_BLOCK",
+            "amount": 1
+        }
+    },
+    {
+        "input": [
+            {
+                "itemID": "BROWN_MUSHROOM",
+                "amount": 64
+            },
+            {
+                "itemID": "SUGAR_CANE",
+                "amount": 64
+            },
+            {
+                "itemID": "ENCHANTED_SPIDER_EYE",
+                "amount": 64
+            }
+        ],
+        "output": {
+            "itemID": "ENCHANTED_FERMENTED_SPIDER_EYE",
+            "amount": 1
+        }
+    },
+    {
+        "input": [
+            {
+                "itemID": "COAL",
+                "amount": 128
+            },
+            {
+                "itemID": "LOG_2",
+                "amount": 32
+            }
+        ],
+        "output": {
+            "itemID": "ENCHANTED_CHARCOAL",
+            "amount": 1
+        }
+    },
+    {
+        "input": [
+            {
+                "itemID": "SUGAR_CANE",
+                "amount": 3
+            },
+            {
+                "itemID": "ENCHANTED_BAKED_POTATO",
+                "amount": 1
+            }
+        ],
+        "output": {
+            "itemID": "HOT_POTATO_BOOK",
+            "amount": 1
+        }
+    },
+    {
+        "input": [
+            {
+                "itemID": "ENCHANTED_COBBLESTONE",
+                "amount": 7
+            },
+            {
+                "itemID": "ENCHANTED_REDSTONE",
+                "amount": 1
+            }
+        ],
+        "output": {
+            "itemID": "COMPACTOR",
+            "amount": 1
+        }
+    },
+    {
+        "input": [
+            {
+                "itemID": "ENCHANTED_COBBLESTONE",
+                "amount": 448
+            },
+            {
+                "itemID": "ENCHANTED_REDSTONE_BLOCK",
+                "amount": 1
+            }
+        ],
+        "output": {
+            "itemID": "SUPER_COMPACTOR_3000",
+            "amount": 1
+        }
+    },
+    {
+        "input": [
+            {
+                "itemID": "ENCHANTED_COBBLESTONE",
+                "amount": 448
+            },
+            {
+                "itemID": "ENCHANTED_REDSTONE_BLOCK",
+                "amount": 1
+            },
+            {
+                "itemID": "COAL",
+                "amount": 1
+            },
+            {
+                "itemID": "COBBLESTONE",
+                "amount": 64
+            },
+            {
+                "itemID": "ENCHANTED_MITHRIL",
+                "amount": 56
+            }
+
+        ],
+        "output": {
+            "itemID": "DWARVEN_COMPACTOR",
+            "amount": 1
+        }
+    },
+    {
+        "input": [
+            {
+                "itemID": "ENCHANTED_IRON",
+                "amount": 3
+            },
+            {
+                "itemID": "ENCHANTED_COAL_BLOCK",
+                "amount": 2
+            }
+        ],
+        "output": {
+            "itemID": "ENCHANTED_LAVA_BUCKET",
+            "amount": 1
+        }
+    },
+    {
+        "input": [
+            {
+                "itemID": "RAW_FISH",
+                "amount": 2
+            },
+            {
+                "itemID": "RAW_FISH:1",
+                "amount": 1
+            }
+        ],
+        "output": {
+            "itemID": "FISH_BAIT",
+            "amount": 1
+        }
+    }
+]
