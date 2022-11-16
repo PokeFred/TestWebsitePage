@@ -7,16 +7,14 @@ class Client {
 
     async runClient() {
         await this.getBazaar();
-        console.log("1");
         await this.getSkyblockItems();
-        console.log("2");
         await this.getRecipes();
-        console.log("3");
         this.setupOutputList();
-        console.log("4");
 
         this.sortList();
         this.printList();
+
+        document.getElementById("available-flips").innerHTML = this.recipes.length;
     }
 
     async getBazaar() {
@@ -36,7 +34,6 @@ class Client {
     async getRecipes() {
         const url = "Recipe.json";
         const rawData = await fetch(url);
-        console.log(rawData);
         const data = await rawData.json();
         this.recipes = data;
     }
@@ -47,9 +44,9 @@ class Client {
         this.recipes.forEach(element => {
             let currentFlip = [];
 
-            const multiplicator = 55;
+            const multiplicator = this.getMultiplicator(element);
 
-            currentFlip['input'] = []; 
+            currentFlip['input'] = [];
             element.input.forEach(element => {
                 let currentInputItem = [];
                 currentInputItem['itemID'] = element.itemID;
@@ -77,6 +74,37 @@ class Client {
         this.baseList = rawOutputList;
     }
 
+    getMultiplicator(element) {
+        let cost = 0;
+        let multiplicator = 0;
+        let highestNumber = 0;
+        let limitPerOrder = 71680;
+
+        element.input.forEach(element => {
+            cost += this.bazaar[element.itemID]['sell_summary'][0]['pricePerUnit'] * element.amount;
+        });
+
+        multiplicator = (this.money / cost) | 0;
+
+        element.input.forEach(element => {
+            if (highestNumber < (element.amount * multiplicator)) {
+                highestNumber = element.amount * multiplicator;
+            }
+        });
+        
+        if (highestNumber > limitPerOrder) {
+            let number = highestNumber / multiplicator
+            let i = 0;
+            while ((number * (multiplicator - i)) > limitPerOrder) {
+                i++
+            }
+
+            multiplicator -= i;
+        }
+
+        return multiplicator;
+    }
+
     getItemName(itemID) {
         let itemName = "";
 
@@ -98,7 +126,7 @@ class Client {
         let erg = "";
 
         currentElement.input.forEach(element => {
-            erg += `<div class="item">${element.amount}x ${this.getItemName(element.itemID)}</div>`;
+            erg += `<div class="item">${this.numberWithCommas(element.amount)}x ${this.getItemName(element.itemID)}</div>`;
         });
 
         return erg;
@@ -133,33 +161,35 @@ class Client {
     formatNumber(number) {
         let newNumber = "";
 
-        if (number > 1000000000) {
+        if (number >= 1000000000) {
             newNumber = "+" + this.round((number /  1000000000), 2) + "b";
-        } else if (number > 1000000) {
+        } else if (number >= 1000000) {
             newNumber = "+" + this.round((number /  1000000), 2) + "m";
-        } else if (number > 1000) {
+        } else if (number >= 1000) {
             newNumber = "+" + this.round((number /  1000), 2) + "k";
         } else if (number >= 0) {
             newNumber = "+" + this.round(number, 2);
-        } else if (number > -1000) {
+        } else if (number >= -1000) {
             newNumber = this.round(number, 2);
-        } else if (number < -1000) {
+        } else if (number <= -1000) {
             newNumber = this.round((number /  1000), 2) + "k";
-        } else if (number < -1000000) {
+        } else if (number <= -1000000) {
             newNumber = this.round((number /  1000000), 2) + "m";
-        } else if (number < -1000000000) {
+        } else if (number <= -1000000000) {
             newNumber = this.round((number /  1000000000), 2) + "b";
         }
         
         return newNumber;
     }
 
+    numberWithCommas(number) {
+        return number.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
+    }
+
     sortList() {
         const list = this.baseList;
 
         let sortKey = this.sortKey;
-        let minProfit = 0;
-        let minPercent = 0;
 
         for (let i = 0; i < list.length; i++) {
             for (let j = 0; j < (list.length - 1); j++) {
@@ -177,9 +207,27 @@ class Client {
         this.outputList = list;
     }
 
+    printSortKey() {
+        if (this.sortKey == "profit") {
+            return "Profit";
+        } else if (this.sortKey == "percent") {
+            return "Percent";
+        } else {
+            return "ERROR";
+        }
+    }
+
     printList() {
         const div = document.getElementById("output");
         div.innerHTML = "";
+
+        div.innerHTML += `
+            <div class="current-filter">
+                <div>Current Sort Option: ${this.printSortKey()}</div>
+                <div>Current Flip Money: ${(this.formatNumber(this.money)).replace("+", "")}</div>
+                <div>Available Flips: ${this.outputList.length}</div>
+            </div>
+        `;
         
         this.outputList.forEach(element => {
             div.innerHTML += `
@@ -195,7 +243,7 @@ class Client {
                             <div class="line"></div>
                             <div class="output">
                                 <div class="small-title">Output</div>
-                                <div class="information">${this.formatNumber(element.output.amount)}x ${this.getItemName(element.output.itemID)}</div>
+                                <div class="information">${this.numberWithCommas(element.output.amount)}x ${this.getItemName(element.output.itemID)}</div>
                             </div>
                             <div class="result">
                                 <div>
@@ -225,12 +273,8 @@ class Client {
 
 function getMoney() {
     const input = document.getElementById("money").value;
-
-    if (input >= 1000) {
-        return input;
-    } else {
-        return 1000;
-    }
+    
+    return 10000000;
 }
 
 async function websiteLoading() {

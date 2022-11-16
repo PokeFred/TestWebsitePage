@@ -5,10 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="https://github.com/PokeFred/TestWebsitePage/blob/main/Style.css">
-    <script src="https://github.com/PokeFred/TestWebsitePage/blob/main/Script.js"></script>
+    <link rel="stylesheet" href="Style.css">
+    <script src="Script.js"></script>
 </head>
 <body onload="websiteLoading()">
+    <button onclick="change()">Refresh</button>
     <div class="filter">
         <div class="sort-options">
             <input class="radioButton" type="radio" id="sort_option_profit" name="sort_option" onChange="change()" checked>
@@ -20,10 +21,15 @@
 
         <div class="money">
             <label for="money">Flip Money:</label>
-            <input type="number" name="money" id="money" placeholder="Base/Min 1" onchange="change()">
+            <input type="number" name="money" id="money" placeholder="Base/Min 1m" onchange="change()">
         </div>
     </div>
 
     <div id="output" class="output"></div>
+
+    <div class="footer">
+        <div class="available-flips">Registert Flips: <span id="available-flips"></span></div>
+        <div class="copyright">PokeFred</div>
+    </div>
 </body>
 </html>
